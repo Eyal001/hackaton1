@@ -21,7 +21,7 @@ def display_instructions(session, interval_secondes=30):
   instructions = session["description"]
   
   for index, instruction in enumerate(instructions):
-    print(f"Step:{index}: {instruction}")
+    print(f"Step {index}: {instruction}")
     time.sleep(interval_secondes)
   
 def show_all_instruction(session, duration_in_minutes):
@@ -46,7 +46,7 @@ def yoga_session():
   finally:
     stop_event.set()
     music_thread.join()
-    print(f"End of the session: {session['name']}")
+    print(f"End of the session {session['name']}")
     
 
 
@@ -61,7 +61,7 @@ def meditation_session():
   finally:
     stop_event.set()
     music_thread.join()
-    print(f"End of the session: {session['name']}")
+    print(f"End of the session {session['name']}")
     
     
     
@@ -76,7 +76,7 @@ def focus_session():
   finally:
     stop_event.set()
     music_thread.join()
-    print(f"End of the session: {session['name']}")
+    print(f"End of the session {session['name']}")
     
 
 
@@ -90,7 +90,7 @@ def breathing_session():
   finally:
     stop_event.set()
     music_thread.join()
-    print(f"End of the session: {session['name']}")
+    print(f"End of the session {session['name']}")
     
     
     
@@ -106,4 +106,4 @@ def sleep_session():
   finally:
     stop_event.set()
     music_thread.join()
-    print(f"End of the session: {session['name']}")
+    print(f"End of the session {session['name']}")
