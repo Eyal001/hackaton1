@@ -78,11 +78,58 @@ class Users :
                 else :
                     break
 
+    def save_exercise (self, exercise) :
+        cursor.execute (f''' SELECT exercise_id FROM exercises WHERE name = '{exercise}' ''')
+        connection.commit
+        exercise_id = cursor.fetchone()[0]
+
+        cursor.execute(f'''INSERT INTO user_exercises (user_id, exercise_id) VALUES ({self.user_id}, {exercise_id})''')
+        connection.commit()
+
+    def save_feelings(self, notes):
+    # Check if an entry exists for today
+        query = f'''
+            SELECT COUNT(*) 
+            FROM feelings 
+            WHERE user_id = {self.user_id} AND date = CURRENT_DATE;
+        '''
+        cursor.execute(query)
+        exists = cursor.fetchone()[0] > 0
+
+        if exists:
+            # Update the existing record
+            query = f'''
+                UPDATE feelings
+                SET relaxation = {notes[0]}, stress = {notes[1]}, anger = {notes[2]}
+                WHERE user_id = {self.user_id} AND date = CURRENT_DATE;
+            '''
+        else:
+            # Insert a new record
+            query = f'''
+                INSERT INTO feelings (user_id, relaxation, stress, anger, date)
+                VALUES ({self.user_id}, {notes[0]}, {notes[1]}, {notes[2]}, CURRENT_DATE);
+            '''
+        cursor.execute(query)
+        connection.commit()
+
+    def fetch_user_feelings(self):
+        query = f'''
+            SELECT relaxation, stress, anger , date
+            FROM feelings 
+            WHERE user_id = {self.user_id}
+            ORDER BY date;
+        '''
+        cursor.execute(query)
+        results = cursor.fetchall()
+        print(results)
+        return results
+    
 
 
-Users.sign_in()
 
 
 
 
-connection.close()
+
+
+# connection.close()
