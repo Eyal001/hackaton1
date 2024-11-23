@@ -4,6 +4,7 @@ import base64
 from io import BytesIO
 import os
 from dotenv import load_dotenv
+import threading
 
 # Spotify API: Get Token
 def get_spotify_token(client_id, client_secret):
@@ -23,14 +24,14 @@ def search_spotify_and_get_preview(token, query):
 
     if response.status_code == 200:
         tracks = response.json()["tracks"]["items"]
-        print('tracks :' ,tracks)
+        # print('tracks :' ,tracks)
         if tracks:
             track = tracks[0]
             track_name = track["name"]
             artist_name = track["artists"][0]["name"]
             preview_url = track["preview_url"]
 
-            print(f"Playing: {track_name} by {artist_name}")
+            # print(f"Playing: {track_name} by {artist_name}")
             return preview_url
         else:
             print("No tracks found for the given query.")
@@ -45,7 +46,7 @@ def play_from_url(url):
         print("No preview available for this track.")
         return
 
-    print("Playing the preview...")
+    # print("Playing the preview...")
     response = requests.get(url)
     audio_data = BytesIO(response.content)
 
@@ -56,9 +57,11 @@ def play_from_url(url):
     while pygame.mixer.music.get_busy():
         pass
 
-# Main Function
-if __name__ == "__main__":
-    # Replace with your Spotify Client ID and Secret
+
+
+
+def play_sound(type, stop_event):
+        # Replace with your Spotify Client ID and Secret
     load_dotenv()
     CLIENT_ID = os.getenv('CLIENT_ID')
     CLIENT_SECRET = os.getenv('CLIENT_SECRET')    
@@ -66,13 +69,11 @@ if __name__ == "__main__":
     token = get_spotify_token(CLIENT_ID, CLIENT_SECRET)
 
     # Example Query (you can replace "Relaxing Music" with any search term)
-    preview_url = search_spotify_and_get_preview(token, "yoga music")
+    query = f"{type} relaxing sound"
+    preview_url = search_spotify_and_get_preview(token, query)
 
     # Play the Preview
+    while not stop_event.is_set():
+        play_from_url(preview_url)
     
-
-    def execute_every_30_seconds():
-        while True:
-            play_from_url(preview_url)  
     
-    execute_every_30_seconds()
