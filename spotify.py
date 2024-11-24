@@ -61,14 +61,14 @@ def play_from_url(url):
 
 
 def play_sound(type, stop_event):
-        # Replace with your Spotify Client ID and Secret
+        
     load_dotenv()
     CLIENT_ID = os.getenv('CLIENT_ID')
     CLIENT_SECRET = os.getenv('CLIENT_SECRET')    
 
     token = get_spotify_token(CLIENT_ID, CLIENT_SECRET)
 
-    # Example Query (you can replace "Relaxing Music" with any search term)
+    
     query = f"{type} relaxing sound"
     preview_url = search_spotify_and_get_preview(token, query)
 

@@ -1,5 +1,6 @@
 from sessions import *
 from database import *
+from graphique import *
 
 def choose_session(user):
     print("Hello! What type of session would you like to choose?")
@@ -40,5 +41,3 @@ def choose_session(user):
 
 
 
-user = Users.sign_in()
-choose_session(user)

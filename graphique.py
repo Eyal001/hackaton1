@@ -1,8 +1,7 @@
 import matplotlib.pyplot as plt
-import numpy as np
-from datetime import datetime
 from database import *
-# Fonction pour recueillir les réponses de l'utilisateur
+
+
 def get_feelings(user):
     questions = [
         "How do you evaluate your relaxation level today ? (1 à 5)",
@@ -42,9 +41,9 @@ def plot_feelings(user):
     plt.figure(figsize=(10, 6))
     
     # Plot each feeling level
-    plt.plot(dates, relaxation, label="Relaxation", marker="o", linestyle="-", color="green")
-    plt.plot(dates, stress, label="Stress", marker="o", linestyle="--", color="red")
-    plt.plot(dates, anger, label="Anger", marker="o", linestyle=":", color="orange")
+    plt.plot(dates, relaxation, label="Relaxation", marker="o", linestyle="-", color="blue")
+    plt.plot(dates, stress, label="Stress", marker="o", linestyle="--", color="green")
+    plt.plot(dates, anger, label="Anger", marker="o", linestyle=":", color="red")
     
     # Formatting the plot
     plt.title("Feelings Evolution for User", fontsize=16)
@@ -62,5 +61,3 @@ def plot_feelings(user):
     # Display the plot
     plt.show()
 
-user = Users.sign_in ()
-plot_feelings(user)

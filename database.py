@@ -1,5 +1,5 @@
 import pg8000
-
+import getpass
 import os
 from dotenv import load_dotenv
 
@@ -35,7 +35,7 @@ class Users :
 
             user_name = input ('Chose a username : ').lower()
             if [user_name] not in usernames :
-                password = input ('Chose a password : ')
+                password = getpass.getpass ('Chose a password : ')
                 query = f''' INSERT INTO users (username, password) VALUES ('{user_name}', '{password}') ''' 
                 cursor.execute(query)
                 connection.commit()
@@ -45,6 +45,8 @@ class Users :
                 cursor.execute(f'''SELECT user_id FROM users WHERE username = '{user_name}' ''')
                 connection.commit()
                 user.user_id = cursor.fetchone()[0]
+                print ('Now sign in please : ')
+                Users.sign_in ()
                 return user
 
             else : 
@@ -54,14 +56,14 @@ class Users :
     def sign_in (cls) :
         usernames = Users.get_usernames()
         while True :
-            username = input ('username : ').lower()
+            username = input ('Enter your username : ').lower()
             if [username] in usernames :
                 cursor.execute(f''' SELECT user_id, password FROM users WHERE username = '{username}' ''' )
                 connection.commit
                 results = cursor.fetchone()
                 good_password = results[1]
                 userid = results[0]
-                password = input ('Password : ')
+                password = getpass.getpass  ('Enter your password : ')
                 if password == good_password :
                     print ('Successfully logged in !')
                     user = Users()
@@ -74,7 +76,8 @@ class Users :
                 print ('This username does not exist, would you like to sign up ?')
                 answer = input ('Y / N :')
                 if answer == 'Y' :
-                    Users.sign_up()
+                    user = Users.sign_up()
+                    return user
                 else :
                     break
 
@@ -121,7 +124,6 @@ class Users :
         '''
         cursor.execute(query)
         results = cursor.fetchall()
-        print(results)
         return results
     
 
