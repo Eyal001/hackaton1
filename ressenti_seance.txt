@@ -1,4 +1,0 @@
-2024-11-23 20:59:53 - Relaxation: 3, Stress: 2, Colère: 1
-2024-11-23 21:00:12 - Relaxation: 3, Stress: 2, Colère: 1
-2024-11-23 21:00:22 - Relaxation: 4, Stress: 3, Colère: 2
-2024-11-23 21:00:38 - Relaxation: 4, Stress: 1, Colère: 1

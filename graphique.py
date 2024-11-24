@@ -13,9 +13,10 @@ def get_feelings(user):
         while True:
             try:
                 note = int(input(question + " "))
-                if 1 <= note <= 5:
-                    notes.append(note)
-                    break
+                if note in {1, 2, 3, 4, 5} :
+                    if 1 <= note <= 5:
+                        notes.append(note)
+                        break
                 else:
                     print("Enter a number between 1 and 5.")
             except ValueError:
