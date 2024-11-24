@@ -3,7 +3,6 @@ import json
 import random
 from spotify import *
 import pyttsx3
-import time
 
 
 
@@ -22,7 +21,7 @@ def select_random_session(exercise_type):
 
 def speak_instruction(instruction):
     engine = pyttsx3.init()
-    engine.setProperty('rate', 150)  # Set speed of speech (default is 200)
+    engine.setProperty('rate', 125)  # Set speed of speech (default is 200)
     engine.setProperty('volume', 1)  # Set volume (range: 0.0 to 1.0)
     voices = engine.getProperty('voices')  
     engine.setProperty('voice', voices[1].id)  # Change voice (index 0: male, index 1: female)

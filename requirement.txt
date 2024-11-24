@@ -1,0 +1,14 @@
+pg8000
+dotenv
+os
+getpass
+time
+json
+random
+pyttsx3
+request
+pygame
+base64
+io
+threading
+matplotlib.pyplot

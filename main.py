@@ -13,21 +13,19 @@ def main () :
     
     while True :
 
-        answer = input ('Answer (S / G / Q) : ')
-        if answer == 'S' :
+        answer = input ('Answer ((S)ession / (G)raph / (Q)uestionary / (E)xit) : ').lower()
+        if answer == 's' :
             choose_session(user)
-            get_feelings (user)
-            plot_feelings(user)
-            break
+            
 
         
-        elif answer == 'G' :
+        elif answer == 'g' :
             plot_feelings(user)
 
-        elif answer == 'Q' :
+        elif answer == 'q' :
             get_feelings (user)
             
-        elif answer == 'E' :
+        elif answer == 'e' :
             print ('See you soon ! Exiting...')
             break
 

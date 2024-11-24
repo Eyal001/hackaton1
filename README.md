@@ -15,7 +15,8 @@ in spotify.py :
 We fetch API from spotify to search for music and get the preview URL that we are listenning to in the exercises
 
 in sessions.py :
-We are reading the json file 'exercises sessions.json' and display step by step a random exercise depending on the user choice 
+We are reading the json file 'exercises sessions.json' and display step by step a random exercise depending on the user choice .
+We select a music from the spotify API and call the speak instruction function in a different threading so we can hear the music in the same time as the instructions
 
 in menu.py :
 Waiting for the user to chose wich exercise he wants to do 
@@ -28,3 +29,6 @@ finally in main.py :
 We connect everything together :
 sign in so we crease a Users' class object 
 and call the different functions depending on the user's choices.
+
+
+MODULES USED :
