@@ -15,9 +15,13 @@ def main () :
         if answer == 'S' :
             choose_session(user)
             get_feelings (user)
+            plot_feelings(user)
+            break
+
         
         elif answer == 'G' :
             plot_feelings(user)
+            break
             
 
         

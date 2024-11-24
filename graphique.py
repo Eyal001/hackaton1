@@ -46,7 +46,7 @@ def plot_feelings(user):
     plt.plot(dates, anger, label="Anger", marker="o", linestyle=":", color="red")
     
     # Formatting the plot
-    plt.title("Feelings Evolution for User", fontsize=16)
+    plt.title(f"Feelings Evolution for {user.username.title()}", fontsize=16)
     plt.xlabel("Date", fontsize=12)
     plt.ylabel("Feeling Level (1-5)", fontsize=12)
     
