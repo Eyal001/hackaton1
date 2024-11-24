@@ -33,10 +33,10 @@ def plot_feelings(user):
         return
     
     # Extracting values from the data
-    dates = [entry[3] for entry in data]  # Dates (already datetime.date)
-    relaxation = [entry[0] for entry in data]  # Relaxation values
-    stress = [entry[1] for entry in data]  # Stress values
-    anger = [entry[2] for entry in data]  # Anger values
+    dates = [entry[3] for entry in data]  
+    relaxation = [entry[0] for entry in data] 
+    stress = [entry[1] for entry in data]  
+    anger = [entry[2] for entry in data]  
     
     # Plotting the graph
     plt.figure(figsize=(10, 6))

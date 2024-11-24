@@ -27,11 +27,9 @@ def search_spotify_and_get_preview(token, query):
         # print('tracks :' ,tracks)
         if tracks:
             track = tracks[0]
-            track_name = track["name"]
-            artist_name = track["artists"][0]["name"]
             preview_url = track["preview_url"]
 
-            # print(f"Playing: {track_name} by {artist_name}")
+
             return preview_url
         else:
             print("No tracks found for the given query.")
@@ -75,5 +73,6 @@ def play_sound(type, stop_event):
     # Play the Preview
     while not stop_event.is_set():
         play_from_url(preview_url)
+        
     
     
