@@ -2,6 +2,10 @@ import time
 import json
 import random
 from spotify import *
+import pyttsx3
+import time
+
+
 
 
 def load_json():
@@ -16,17 +20,30 @@ def select_random_session(exercise_type):
   selected_session = random.choice(filtered_sessions)
   return selected_session
 
+def speak_instruction(instruction):
+    engine = pyttsx3.init()
+    engine.setProperty('rate', 150)  # Set speed of speech (default is 200)
+    engine.setProperty('volume', 1)  # Set volume (range: 0.0 to 1.0)
+    voices = engine.getProperty('voices')  
+    engine.setProperty('voice', voices[1].id)  # Change voice (index 0: male, index 1: female)
+    engine.say(instruction)
+    engine.runAndWait()
+
 def display_instructions(session, interval_seconds=30, stop_event=None):
     print(f"Starting the session: {session['name']}\n")
     instructions = session["description"]
-    
+
     for index, instruction in enumerate(instructions):
         # Check if the session should be interrupted
         if stop_event and stop_event.is_set():
             print("Session interrupted by user.")
             return
-        
+
         print(f"Step {index + 1}: {instruction}")
+        
+        # Run the speech in a separate thread
+        threading.Thread(target=speak_instruction, args=(instruction,)).start()
+
         # Wait for the interval duration while monitoring stop_event
         for _ in range(interval_seconds):
             if stop_event and stop_event.is_set():
