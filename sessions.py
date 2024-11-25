@@ -36,19 +36,29 @@ def display_instructions(session, interval_seconds=30, stop_event=None):
         # Check if the session should be interrupted
         if stop_event and stop_event.is_set():
             print("Session interrupted by user.")
+            stop_event.set()
             return
 
         print(f"Step {index + 1}: {instruction}")
-        
+
         # Run the speech in a separate thread
-        threading.Thread(target=speak_instruction, args=(instruction,)).start()
+        speech_thread = threading.Thread(target=speak_instruction, args=(instruction,))
+        speech_thread.start()
 
         # Wait for the interval duration while monitoring stop_event
         for _ in range(interval_seconds):
             if stop_event and stop_event.is_set():
                 print("Session interrupted by user.")
+                stop_event.set()
                 return
             time.sleep(1)
+
+        # Ensure the speech finishes before continuing
+        speech_thread.join()
+
+    print("Session completed.")
+    if stop_event:
+        stop_event.set()
   
 def show_all_instruction(session, duration_in_minutes):
   print(f"Starting the session: {session['name']}\n")

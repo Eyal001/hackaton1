@@ -74,8 +74,8 @@ class Users :
                     print ('Wrong password, try again !')
             else :
                 print ('This username does not exist, would you like to sign up ?')
-                answer = input ('Y / N :')
-                if answer == 'Y' :
+                answer = input ('Y / N :').lower()
+                if answer == 'y' :
                     user = Users.sign_up()
                     return user
                 else :
